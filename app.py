@@ -6,7 +6,7 @@ from pyngrok import ngrok
 app = Flask(__name__)
 
 # Ensure that ngrok is authenticated; replace with your auth token
-NGROK_AUTH_TOKEN = "2skl3GFWLtpfswCnpEXi02Msz8Z_7uv116RxBdruhmKCU2Npy"  # Replace with your token
+NGROK_AUTH_TOKEN = "2sklYpHuz3J4tYZZVSiYFjK0GXY_7zYFWSP59ZXbocYvHKxFB"  # Replace with your token
 ngrok.set_auth_token(NGROK_AUTH_TOKEN)
 
 # Start ngrok tunnel
