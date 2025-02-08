@@ -6,7 +6,7 @@ from pyngrok import ngrok
 app = Flask(__name__)
 
 # Ensure that ngrok is authenticated; replace with your auth token
-NGROK_AUTH_TOKEN = "2sitDZLhQzmROeFMmlqmJumCtrs_3hyXuQS3XqzXuH4U9yNux"  # Replace with your token
+NGROK_AUTH_TOKEN = "2skl3GFWLtpfswCnpEXi02Msz8Z_7uv116RxBdruhmKCU2Npy"  # Replace with your token
 ngrok.set_auth_token(NGROK_AUTH_TOKEN)
 
 # Start ngrok tunnel
@@ -18,8 +18,8 @@ with open("ngrok_url.txt", "w") as file:
     file.write(str(public_url))
 print("Ngrok public URL saved to ngrok_url.txt")
 
-@app.route('/run_Spike', methods=['POST'])
-def run_spike():
+@app.route('/run_Vampire', methods=['POST'])
+def run_vampire():
     # Extract parameters from JSON request
     data = request.get_json()
     ip = data.get("ip")
@@ -33,9 +33,9 @@ def run_spike():
         return jsonify({"error": "Missing required parameters (ip, port, time, packet_size, threads)"}), 400
 
     try:
-        # Run the Spike binary with provided parameters
+        # Run the vampire binary with provided parameters
         result = subprocess.run(
-            ["./Spike", ip, str(port), str(duration), str(packet_size), str(threads)],
+            ["./Vampire", ip, str(port), str(duration), str(packet_size), str(threads)],
             capture_output=True, text=True
         )
 
@@ -45,8 +45,8 @@ def run_spike():
         return jsonify({"output": output, "error": error})
 
     except Exception as e:
-        return jsonify({"error": f"Failed to run Spike: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to run Vampire: {str(e)}"}), 500
 
 if __name__ == '__main__':
-    print(f"Server running at public URL: {public_url}/run_spike")
+    print(f"Server running at public URL: {public_url}/run_vampire")
     app.run(port=5000)
